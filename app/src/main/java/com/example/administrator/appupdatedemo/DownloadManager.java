@@ -116,7 +116,8 @@ public class DownloadManager {
             switch (msg.what) {
                 case DOWNLOADED:
                     dialog.dismiss();
-                    installAPK();
+                    Toast.makeText(mContext, "下载完成", Toast.LENGTH_SHORT).show();
+//                    installAPK();
                     break;
                 case DOWNLOAD_FAILED:
                     dialog.dismiss();
