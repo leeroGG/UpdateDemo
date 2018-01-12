@@ -4,9 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -57,9 +56,12 @@ public class MainActivity extends AppCompatActivity {
         dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
-                DownloadManager manager = new DownloadManager(MainActivity.this, url);
+                /*DownloadManager manager = new DownloadManager(MainActivity.this, url);
                 sweetAlertDialog.dismiss();
-                manager.showDownloadDialog();
+                manager.showDownloadDialog();*/
+                sweetAlertDialog.dismiss();
+                DownloadTask task = new DownloadTask(MainActivity.this, new ProgressDialog(MainActivity.this));
+                task.execute(url);
             }
         });
         dialog.show();
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         List<PermissionItem> permissionItems = new ArrayList<>();
         permissionItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储", R.drawable.permission_ic_storage));
         permissionItems.add(new PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "存储", R.drawable.permission_ic_storage));
+        permissionItems.add(new PermissionItem(Manifest.permission.WAKE_LOCK, "电源", R.drawable.permission_ic_storage));
         HiPermission.create(MainActivity.this)
                 .permissions(permissionItems)
                 .checkMutiPermission(new PermissionCallback() {

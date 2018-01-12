@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--圆环进度条-->
+    <attr name="progress" format="reference|integer"/>
+    <attr name="progressWidth" format="dimension|reference|float"/>
+    <attr name="progressColor" format="color|reference|integer"/>
+    <attr name="backgroundColor" format="color|reference|integer"/>
+    <declare-styleable name="CircleProgressBar">
+        <attr name="progress"/>
+        <attr name="progressWidth"/>
+        <attr name="progressColor"/>
+        <attr name="backgroundColor"/>
+    </declare-styleable>
+
+</resources>

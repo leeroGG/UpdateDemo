@@ -34,6 +34,7 @@ public class DownloadManager {
     private static final String savePath = "/sdcard/download/"; //apk保存到SD卡的路径
     private static final String saveFileName = savePath + "test.apk"; //完整路径名
 
+    private static final int DOWNLOADING = 1; // 下载中
     private static final int DOWNLOADED = 2; //下载完毕
     private static final int DOWNLOAD_FAILED = 3; //下载失败
     private boolean cancelFlag = false; //取消下载标志位
@@ -95,6 +96,7 @@ public class DownloadManager {
                             break;
                         }
                         fos.write(buf, 0, numread);
+                        mHandler.sendEmptyMessage(DOWNLOADING);//下载中，更新进度条
                     } while (!cancelFlag); //点击取消就停止下载.
 
                     fos.close();
