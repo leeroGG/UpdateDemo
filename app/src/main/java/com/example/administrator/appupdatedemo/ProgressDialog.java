@@ -17,6 +17,7 @@ public class ProgressDialog extends Dialog {
 
     private CircleProgressBar progressBar;
     private TextView progressText;
+    private TextView progressSize;
 
     protected ProgressDialog(Context context) {
         super(context);
@@ -24,11 +25,13 @@ public class ProgressDialog extends Dialog {
 
         progressBar = findViewById(R.id.progress);
         progressText = findViewById(R.id.progress_num);
+        progressSize = findViewById(R.id.progress_size);
     }
 
-    public void setProgress(int progress) {
+    public void setProgress(int progress, String total, String current) {
         progressBar.setProgress(progress);
         progressText.setText(progress + "%");
+        progressSize.setText(current + "/" + total);
     }
 
 }

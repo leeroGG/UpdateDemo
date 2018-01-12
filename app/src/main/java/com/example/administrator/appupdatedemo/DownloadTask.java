@@ -3,6 +3,7 @@ package com.example.administrator.appupdatedemo;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.PowerManager;
+import android.text.format.Formatter;
 import android.widget.Toast;
 
 import java.io.File;
@@ -26,6 +27,8 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
     private Context context;
     private PowerManager.WakeLock mWakeLock;
     private ProgressDialog mProgressDialog;
+    private int fileLength; // 文件大小
+    private long total; // 当前已下载量
 
     public DownloadTask(Context context, ProgressDialog dialog) {
         this.context = context;
@@ -46,7 +49,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
             }
 
             // 文件大小
-            int fileLength = connection.getContentLength();
+            fileLength = connection.getContentLength();
 
             // 下载文件
             input = connection.getInputStream();
@@ -61,7 +64,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
             output = new FileOutputStream(apkFile);
 
             byte buf[] = new byte[1024];
-            long total = 0;
+            total = 0;
             int count;
             while ((count = input.read(buf)) != -1) {
                 // 返回取消
@@ -105,7 +108,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
-        mProgressDialog.setProgress(progress[0]);
+        mProgressDialog.setProgress(progress[0], formatSize(String.valueOf(fileLength)), formatSize(String.valueOf(total)));
     }
 
     @Override
@@ -116,5 +119,9 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
             Toast.makeText(context,"Download error: "+result, Toast.LENGTH_LONG).show();
         else
             Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
+    }
+
+    private String formatSize(String target_size) {
+        return Formatter.formatFileSize(context, Long.valueOf(target_size));
     }
 }

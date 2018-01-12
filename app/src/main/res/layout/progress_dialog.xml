@@ -23,9 +23,18 @@
         android:text="0%"/>
 
     <TextView
+        android:id="@+id/progress_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress_size"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textSize="14sp"
